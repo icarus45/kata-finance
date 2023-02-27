@@ -3,10 +3,8 @@ package com.kata.finance.valocb.service;
 import com.kata.finance.valocb.model.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class ReadInputFile {
@@ -71,41 +69,5 @@ public static void readInputConfigFile() throws IOException{
             }
 
     }
-
-
-    public static void readFile(String fileName , int firstLinePosition) throws IOException {
-        InputStream iStream = null;
-        try {
-            ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-             iStream = classloader.getResourceAsStream(fileName);
-
-            if (iStream == null) {
-                throw new IllegalArgumentException(fileName + " file not found!");
-            } else {
-                InputStreamReader streamReader = new InputStreamReader(iStream, StandardCharsets.UTF_8);
-                BufferedReader reader = new BufferedReader(streamReader);
-                String line;
-                int i = 0;
-                while ((line = reader.readLine()) != null) {
-                    if(i >= firstLinePosition){
-                        System.out.println(line);
-                    }
-                    i++;
-                }
-            }
-        }catch (IOException e) {
-            e.printStackTrace();
-        }finally {
-            try {
-                if(iStream != null){
-                    iStream.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-
 
 }

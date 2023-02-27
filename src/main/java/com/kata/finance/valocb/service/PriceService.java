@@ -3,7 +3,6 @@ package com.kata.finance.valocb.service;
 import com.kata.finance.valocb.model.Portefeuille;
 import com.kata.finance.valocb.model.Produit;
 import com.kata.finance.valocb.model.Underlying;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;

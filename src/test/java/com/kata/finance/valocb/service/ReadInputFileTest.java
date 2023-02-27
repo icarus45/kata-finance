@@ -1,6 +1,7 @@
 package com.kata.finance.valocb.service;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -14,6 +15,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ReadInputFileTest {
 
+   private ReadInputFile readInputFile ;
+
+    @BeforeEach
+    public void init() {
+        readInputFile = new ReadInputFile();
+    }
+
+
     @Test
     void inputFileConfigExist() {
         String rootPath = Thread.currentThread().getContextClassLoader().getResource("inputFileConfig.properties").getPath();
@@ -23,7 +32,6 @@ class ReadInputFileTest {
 
     @Test
     void forexFirstLineNumberIsNotNull() throws IOException {
-        ReadInputFile readInputFile = new ReadInputFile();
         readInputFile.readInputConfigFile();
         assertNotNull(readInputFile.inputFileConfig.getForexFirstLineNumber());
 
@@ -32,7 +40,6 @@ class ReadInputFileTest {
 
     @Test
     void pricesFirstLineNumberIsNotNull() throws IOException {
-        ReadInputFile readInputFile = new ReadInputFile();
         readInputFile.readInputConfigFile();
         assertNotNull(readInputFile.inputFileConfig.getPricesFirstLineNumber());
 
@@ -40,7 +47,6 @@ class ReadInputFileTest {
 
     @Test
     void productFirstLineNumberIsNotNull() throws IOException {
-        ReadInputFile readInputFile = new ReadInputFile();
         readInputFile.readInputConfigFile();
         assertNotNull(readInputFile.inputFileConfig.getProductFirstLineNumber());
 
@@ -48,7 +54,6 @@ class ReadInputFileTest {
 
     @Test
     void forexFirstLineNumberIsGreaterThanZero() throws IOException {
-        ReadInputFile readInputFile = new ReadInputFile();
         readInputFile.readInputConfigFile();
         assertTrue(readInputFile.inputFileConfig.getForexFirstLineNumber() > 0);
     }
@@ -56,7 +61,6 @@ class ReadInputFileTest {
 
     @Test
     void pricesFirstLineNumberIsGreaterThanZero() throws IOException {
-        ReadInputFile readInputFile = new ReadInputFile();
         readInputFile.readInputConfigFile();
         assertTrue(readInputFile.inputFileConfig.getPricesFirstLineNumber() > 0);
 
@@ -64,7 +68,6 @@ class ReadInputFileTest {
 
     @Test
     void productFirstLineNumberIsGreaterThanZero() throws IOException {
-        ReadInputFile readInputFile = new ReadInputFile();
         readInputFile.readInputConfigFile();
         assertTrue(readInputFile.inputFileConfig.getProductFirstLineNumber() > 0);
     }
@@ -73,7 +76,6 @@ class ReadInputFileTest {
     // Separateur ne doit pas est null
     @Test
     void forexLineSeparatorIsNotNull() throws IOException {
-        ReadInputFile readInputFile = new ReadInputFile();
         readInputFile.readInputConfigFile();
         assertNotNull(readInputFile.inputFileConfig.getForexLineSeparator());
 
@@ -82,7 +84,6 @@ class ReadInputFileTest {
 
     @Test
     void pricesLineSeparatorIsNotNull() throws IOException {
-        ReadInputFile readInputFile = new ReadInputFile();
         readInputFile.readInputConfigFile();
         assertNotNull(readInputFile.inputFileConfig.getPricesLineSeparator());
 
@@ -90,7 +91,6 @@ class ReadInputFileTest {
 
     @Test
     void productLineSeparatorIsNotNull() throws IOException {
-        ReadInputFile readInputFile = new ReadInputFile();
         readInputFile.readInputConfigFile();
         assertNotNull(readInputFile.inputFileConfig.getProductLineSeparator());
 
@@ -101,7 +101,6 @@ class ReadInputFileTest {
 
     @Test
     void forexLineSeparatorSizeIsOne() throws IOException {
-        ReadInputFile readInputFile = new ReadInputFile();
         readInputFile.readInputConfigFile();
         assertEquals(1,readInputFile.inputFileConfig.getForexLineSeparator().length());
 
@@ -110,14 +109,12 @@ class ReadInputFileTest {
 
     @Test
     void pricesLineSeparatorSizeIsOne() throws IOException {
-        ReadInputFile readInputFile = new ReadInputFile();
         readInputFile.readInputConfigFile();
         assertEquals(1,readInputFile.inputFileConfig.getPricesLineSeparator().length());
     }
 
     @Test
     void productLineSeparatorSizeIsOne() throws IOException {
-        ReadInputFile readInputFile = new ReadInputFile();
         readInputFile.readInputConfigFile();
         assertEquals(1,readInputFile.inputFileConfig.getProductLineSeparator().length());
     }
@@ -126,7 +123,7 @@ class ReadInputFileTest {
 
 
     @Test
-    void forexFileExist() {
+   static void forexFileExist() {
         String rootPath = Thread.currentThread().getContextClassLoader().getResource("Forex.csv").getPath();
         File file = new File(rootPath);
         assertTrue(file.exists());
@@ -144,6 +141,12 @@ class ReadInputFileTest {
         String rootPath = Thread.currentThread().getContextClassLoader().getResource("Product.csv").getPath();
         File file = new File(rootPath);
         assertTrue(file.exists());
+    }
+
+    @Test
+    void forexFileContentIsValide(){
+        forexFileExist();
+        //int currencyNomber =
     }
 
 }

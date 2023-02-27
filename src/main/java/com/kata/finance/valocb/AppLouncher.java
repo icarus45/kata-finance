@@ -1,6 +1,5 @@
 package com.kata.finance.valocb;
 
-
 import com.kata.finance.valocb.service.ForexService;
 import com.kata.finance.valocb.service.PriceService;
 import com.kata.finance.valocb.service.ProductService;
