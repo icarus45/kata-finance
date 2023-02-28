@@ -19,8 +19,8 @@ public class ForexService {
 
     /**
      *
-     * @param firstLinePosition
-     * @param separateur
+     * @param firstLinePosition : indique la première ligne où doit debuter la lecture des données
+     * @param separateur : indique le separateur utilisé entre les differentes données dans le fichier
      * @throws IOException
      */
     public static  void readForexFile(int firstLinePosition, String separateur) throws IOException {

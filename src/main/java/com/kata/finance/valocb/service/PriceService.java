@@ -22,8 +22,10 @@ public class PriceService {
 
     /**
      *
-     * @param firstLinePosition
-     * @param separateur
+     * Methode pour lire le fichier prices en entrée
+     *
+     * @param firstLinePosition : indique la ligne de la premiére valeur au sein du fichier
+     * @param separateur : indique le separateur utilisé
      * @throws IOException
      */
     public static  void readPricesFile(int firstLinePosition, String separateur) throws IOException {

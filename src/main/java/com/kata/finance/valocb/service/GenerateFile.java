@@ -22,6 +22,7 @@ public class GenerateFile {
 
 
     /**
+     * Methode qui permet de Créer le fichier csv donnant la valeur des produits par client
      *
      * @throws IOException
      */
@@ -40,8 +41,10 @@ public class GenerateFile {
 
     /**
      *
-     * @param produitLists
-     * @param portefeuilles
+     * Methode qui calcule la valeur des produits d'un client
+     *
+     * @param produitLists : liste des produits du client
+     * @param portefeuilles : les composants des produits du client courant
      * @return
      */
     public static int calculerValeurParProduit(Map<String,Integer> produitLists,Set<Portefeuille> portefeuilles){
@@ -70,6 +73,7 @@ public class GenerateFile {
 
     /**
      *
+     * Méthode qui calcul la valeur de chaque portefeuille
      * @throws IOException
      */
     public static void evaluatePortefeuille( ) throws IOException {

@@ -19,9 +19,10 @@ public class ProductService {
     private static final Logger logger = LogManager.getLogger(ProductService.class);
 
     /**
+     *Methode pour lire le fichier des product:
      *
-     * @param firstLinePosition
-     * @param separateur
+     * @param firstLinePosition : ligne de la premiére valeur
+     * @param separateur : separateur utilisé au sein du fichier
      * @throws IOException
      */
     public static  void readProductFile(int firstLinePosition, String separateur) throws IOException {
