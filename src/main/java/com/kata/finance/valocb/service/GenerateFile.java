@@ -13,16 +13,16 @@ public class GenerateFile {
     public static Set<OutPutFileFormat> outPutFileFormatSte;
 
     public static void  createPortefeuilleFile(){
-        Set<Portefeuille> portefeuilles = ReadInputFile.portefeuilles;
+        Set<Portefeuille> portefeuilles = PriceService.portefeuilles;
     }
 
     public static  void createClientProductFile() throws IOException {
         outPutFileFormatSte = new HashSet<OutPutFileFormat>();
-        Set<PortefeuilleByClient> portefeuilleByClients = ReadInputFile.mesPorteufeuille;
+        Set<PortefeuilleByClient> portefeuilleByClients = ProductService.mesPorteufeuilles;
 
         for(PortefeuilleByClient portefeuilleByClient : portefeuilleByClients){
             Map<String,Integer> produitLists = portefeuilleByClient.getProduitList();
-           int valeurPortefeuille =  calculerValeurParProduit(produitLists,ReadInputFile.portefeuilles);
+           int valeurPortefeuille =  calculerValeurParProduit(produitLists,PriceService.portefeuilles);
             outPutFileFormatSte.add(new OutPutFileFormat(portefeuilleByClient.getClientName(),valeurPortefeuille));
         }
         generateOutPutData(outPutFileFormatSte,ReadInputFile.inputFileConfig.getReportingClientFileName());
@@ -43,7 +43,7 @@ public class GenerateFile {
                 if (currentProduit != null){
                     List<Underlying> underlyings = currentProduit.getUnderlyings();
                     for (Underlying underlying : underlyings) {
-                        float parity = getCurrencyValue(underlying.getCurrency(),ReadInputFile.forexSet);
+                        float parity = getCurrencyValue(underlying.getCurrency(),ForexService.forexSet);
                         somme += underlying.getPrice()*parity;
                     }
                 }
@@ -57,22 +57,19 @@ public class GenerateFile {
 
     public static void evaluatePortefeuille( ) throws IOException {
         outPutFileFormatSte = new HashSet<OutPutFileFormat>();
-            for (Portefeuille portefeuille : ReadInputFile.portefeuilles) {
+            for (Portefeuille portefeuille : PriceService.portefeuilles) {
                 int valeurPortefeuille = 0;
                 List<Produit> produits = portefeuille.getProduits();
                 for(Produit produit : produits) {
                     int valeurProduit = 0;
                     List<Underlying> underlyings = produit.getUnderlyings();
                     for(Underlying underlying : underlyings){
-                        float parity = getCurrencyValue(underlying.getCurrency(),ReadInputFile.forexSet);
+                        float parity = getCurrencyValue(underlying.getCurrency(),ForexService.forexSet);
                         valeurProduit += underlying.getPrice()*parity;
                     }
-
-                    //System.out.println(produit.getProduitName() + " a pour valeur : "+ valeurProduit);
                     valeurPortefeuille += valeurProduit;
                 }
                 outPutFileFormatSte.add(new OutPutFileFormat(portefeuille.getPortefeuilleName(),valeurPortefeuille));
-                //System.out.println("Valeur portefeuille "+ portefeuille.getPortefeuilleName()+"  est de  : "+valeurPortefeuille);
             }
         generateOutPutData(outPutFileFormatSte,ReadInputFile.inputFileConfig.getReportingPortfolioFileName());
     }

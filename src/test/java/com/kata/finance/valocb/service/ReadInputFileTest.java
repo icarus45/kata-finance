@@ -10,16 +10,20 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ReadInputFileTest {
 
    private ReadInputFile readInputFile ;
+   private Properties properties;
 
     @BeforeEach
     public void init() {
+
         readInputFile = new ReadInputFile();
+        properties = new Properties();
     }
 
 
@@ -143,10 +147,42 @@ class ReadInputFileTest {
         assertTrue(file.exists());
     }
 
+
+    @Test
+    void inputConfigFileDataIsNotEmpty() throws IOException {
+        forexFileExist();
+        readInputFile.readInputConfigFile();
+        properties = readInputFile.properties;
+        assertNotNull(properties.getProperty("forexFirstLineNumber"));
+        assertNotNull(properties.getProperty("pricesFirstLineNumber"));
+        assertNotNull(properties.getProperty("productFirstLineNumber"));
+        assertNotNull(properties.getProperty("forexLineSeparator"));
+        assertNotNull(properties.getProperty("pricesLineSeparator"));
+        assertNotNull(properties.getProperty("productLineSeparator"));
+        assertNotNull(properties.getProperty("reportingPortfolioFileName"));
+        assertNotNull(properties.getProperty("reportingClientFileName"));
+        assertNotNull(properties.getProperty("inputFileSeperator"));
+    }
+
+    @Test
+    void propertiesFileExist(){
+        String rootPath = Thread.currentThread().getContextClassLoader().getResource("inputFileConfig.properties").getPath();
+        File file = new File(rootPath);
+        assertTrue(file.exists());
+    }
+
     @Test
     void forexFileContentIsValide(){
         forexFileExist();
         //int currencyNomber =
     }
 
+    @Test
+    void readProductFile() throws IOException {
+        productFileExist();
+        inputConfigFileDataIsNotEmpty();
+        ProductService productService = new ProductService();
+        //int firstLinePosition, String separateur
+       // productService.mesPorteufeuilles()
+    }
 }

@@ -10,13 +10,11 @@ import java.util.*;
 public class ReadInputFile {
 
     private static final Logger logger = LogManager.getLogger(ReadInputFile.class);
-
     public static InputFileConfig inputFileConfig = new InputFileConfig();
-    static Properties properties = new Properties();
-    public static Set<Forex> forexSet;
+    public static Properties properties = new Properties();
     public  static Map productsByClient;
-    public static Set<PortefeuilleByClient> mesPorteufeuille;
-    public static Set<Portefeuille> portefeuilles;
+
+
 
 
 public static void readInputConfigFile() throws IOException{

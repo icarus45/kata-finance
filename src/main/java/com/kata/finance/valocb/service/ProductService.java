@@ -9,16 +9,18 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class ProductService {
+    public static Set<PortefeuilleByClient> mesPorteufeuilles;
 
     private static final Logger logger = LogManager.getLogger(ProductService.class);
 
     public static  void readProductFile(int firstLinePosition, String separateur) throws IOException {
         String fileName = "Product.csv";
-        ReadInputFile.mesPorteufeuille  = new HashSet<PortefeuilleByClient>();
+        mesPorteufeuilles  = new HashSet<PortefeuilleByClient>();
 
         InputStream iStream = null;
         try {
@@ -40,12 +42,12 @@ public class ProductService {
                         String clientName = currentLine[1];
                         int quantites  =Integer.parseInt(currentLine[2]);
                         // recherche du client (c dans le set)
-                        PortefeuilleByClient currentClient = ReadInputFile.mesPorteufeuille.stream().filter(c -> c.getClientName().equals(clientName)).findAny().orElse(null);
+                        PortefeuilleByClient currentClient = mesPorteufeuilles.stream().filter(c -> c.getClientName().equals(clientName)).findAny().orElse(null);
                         if(currentClient != null){
                             PortefeuilleByClient portefeuilleByClient = new PortefeuilleByClient();
                             PortefeuilleByClient currentClientTemps = currentClient;
                             Map<String,Integer> currentClientProduits = currentClientTemps.getProduitList();
-                            ReadInputFile.mesPorteufeuille.removeIf(p -> p.getClientName().equals(clientName));
+                            mesPorteufeuilles.removeIf(p -> p.getClientName().equals(clientName));
                             //parcourrir la map pour trouver la key
                             if(currentClientProduits.containsKey(produitName)){
                                 int oldValue = currentClientProduits.get(produitName);
@@ -53,12 +55,12 @@ public class ProductService {
                                 NewClientProduits.put(produitName,oldValue + quantites);
                                 portefeuilleByClient.setClientName(clientName);
                                 portefeuilleByClient.setProduitList(NewClientProduits);
-                                ReadInputFile.mesPorteufeuille.add(portefeuilleByClient);
+                                mesPorteufeuilles.add(portefeuilleByClient);
                             }else{
                                 currentClientProduits.put(produitName,quantites);
                                 portefeuilleByClient.setClientName(clientName);
                                 portefeuilleByClient.setProduitList(currentClientProduits);
-                                ReadInputFile.mesPorteufeuille.add(portefeuilleByClient);
+                                mesPorteufeuilles.add(portefeuilleByClient);
                             }
 
                         }else{
@@ -67,7 +69,7 @@ public class ProductService {
                             produitList.put(produitName,quantites) ;
                             portefeuilleByClient.setClientName(clientName);
                             portefeuilleByClient.setProduitList(produitList);
-                            ReadInputFile.mesPorteufeuille.add(portefeuilleByClient);
+                            mesPorteufeuilles.add(portefeuilleByClient);
                         }
                     }
                     i++;

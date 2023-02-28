@@ -9,11 +9,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
+import java.util.Set;
 
 
 public class ForexService {
 
     private static final Logger logger = LogManager.getLogger(ForexService.class);
+    public static Set<Forex> forexSet;
 
     public static  void readForexFile(int firstLinePosition, String separateur) throws IOException {
         String fileName = "Forex.csv";
@@ -21,7 +23,7 @@ public class ForexService {
         try {
             ClassLoader classloader = Thread.currentThread().getContextClassLoader();
             iStream = classloader.getResourceAsStream(fileName);
-            ReadInputFile.forexSet = new HashSet<Forex>();
+            forexSet = new HashSet<Forex>();
 
             if (iStream == null) {
                 throw new IllegalArgumentException(fileName + " file not found!");
@@ -48,7 +50,7 @@ public class ForexService {
                         forex.setEurForex(currentLine[0]);
                         forex.setOtherForex(currentLine[1]);
                         forex.setParity(coeff);
-                        ReadInputFile.forexSet.add(forex);
+                        forexSet.add(forex);
                     }
                     i++;
                 }
