@@ -12,10 +12,19 @@ public class GenerateFile {
     private static final Logger logger = LogManager.getLogger(GenerateFile.class);
     public static Set<OutPutFileFormat> outPutFileFormatSte;
 
+
+    /**
+     *
+     */
     public static void  createPortefeuilleFile(){
         Set<Portefeuille> portefeuilles = PriceService.portefeuilles;
     }
 
+
+    /**
+     *
+     * @throws IOException
+     */
     public static  void createClientProductFile() throws IOException {
         outPutFileFormatSte = new HashSet<OutPutFileFormat>();
         Set<PortefeuilleByClient> portefeuilleByClients = ProductService.mesPorteufeuilles;
@@ -29,7 +38,12 @@ public class GenerateFile {
 
     }
 
-
+    /**
+     *
+     * @param produitLists
+     * @param portefeuilles
+     * @return
+     */
     public static int calculerValeurParProduit(Map<String,Integer> produitLists,Set<Portefeuille> portefeuilles){
         int somme = 0;
         int nombreProduit = 0;
@@ -54,7 +68,10 @@ public class GenerateFile {
         return somme*nombreProduit;
     }
 
-
+    /**
+     *
+     * @throws IOException
+     */
     public static void evaluatePortefeuille( ) throws IOException {
         outPutFileFormatSte = new HashSet<OutPutFileFormat>();
             for (Portefeuille portefeuille : PriceService.portefeuilles) {
@@ -85,7 +102,12 @@ public class GenerateFile {
         return currencyValue;
     }
 
-
+    /**
+     *
+     * @param datas
+     * @param fileName
+     * @throws IOException
+     */
     public static void generateOutPutData(Set<OutPutFileFormat> datas, String fileName) throws IOException{
         String folderPath = getClassL()+ fileName ;
         try{
@@ -103,8 +125,11 @@ public class GenerateFile {
         }
     }
 
-
-public static String getClassL(){
+    /**
+     *
+     * @return
+     */
+    public static String getClassL(){
     String path = Thread.currentThread().getContextClassLoader().getResource("").getPath().toString();
     return  path;
 }

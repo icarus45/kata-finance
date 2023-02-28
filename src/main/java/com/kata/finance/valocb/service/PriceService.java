@@ -20,6 +20,12 @@ public class PriceService {
     private static final Logger logger = LogManager.getLogger(PriceService.class);
     public static Set<Portefeuille> portefeuilles;
 
+    /**
+     *
+     * @param firstLinePosition
+     * @param separateur
+     * @throws IOException
+     */
     public static  void readPricesFile(int firstLinePosition, String separateur) throws IOException {
         String fileName = "Prices.csv";
         portefeuilles  = new HashSet<Portefeuille>();

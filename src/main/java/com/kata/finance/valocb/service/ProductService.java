@@ -18,6 +18,12 @@ public class ProductService {
 
     private static final Logger logger = LogManager.getLogger(ProductService.class);
 
+    /**
+     *
+     * @param firstLinePosition
+     * @param separateur
+     * @throws IOException
+     */
     public static  void readProductFile(int firstLinePosition, String separateur) throws IOException {
         String fileName = "Product.csv";
         mesPorteufeuilles  = new HashSet<PortefeuilleByClient>();

@@ -1,5 +1,6 @@
 package com.kata.finance.valocb.service;
 
+import com.kata.finance.valocb.model.InputFileConfig;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,14 +17,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ReadInputFileTest {
 
-   private ReadInputFile readInputFile ;
-   private Properties properties;
+    private ReadInputFile readInputFile;
+    private InputFileConfig inputConfig;
 
     @BeforeEach
     public void init() {
 
         readInputFile = new ReadInputFile();
-        properties = new Properties();
+        inputConfig = new InputFileConfig();
     }
 
 
@@ -101,12 +102,10 @@ class ReadInputFileTest {
     }
 
 
-
-
     @Test
     void forexLineSeparatorSizeIsOne() throws IOException {
         readInputFile.readInputConfigFile();
-        assertEquals(1,readInputFile.inputFileConfig.getForexLineSeparator().length());
+        assertEquals(1, readInputFile.inputFileConfig.getForexLineSeparator().length());
 
     }
 
@@ -114,20 +113,19 @@ class ReadInputFileTest {
     @Test
     void pricesLineSeparatorSizeIsOne() throws IOException {
         readInputFile.readInputConfigFile();
-        assertEquals(1,readInputFile.inputFileConfig.getPricesLineSeparator().length());
+        assertEquals(1, readInputFile.inputFileConfig.getPricesLineSeparator().length());
     }
 
     @Test
     void productLineSeparatorSizeIsOne() throws IOException {
         readInputFile.readInputConfigFile();
-        assertEquals(1,readInputFile.inputFileConfig.getProductLineSeparator().length());
+        assertEquals(1, readInputFile.inputFileConfig.getProductLineSeparator().length());
     }
     //******************** **********
 
 
-
     @Test
-   static void forexFileExist() {
+    static void forexFileExist() {
         String rootPath = Thread.currentThread().getContextClassLoader().getResource("Forex.csv").getPath();
         File file = new File(rootPath);
         assertTrue(file.exists());
@@ -152,29 +150,27 @@ class ReadInputFileTest {
     void inputConfigFileDataIsNotEmpty() throws IOException {
         forexFileExist();
         readInputFile.readInputConfigFile();
-        properties = readInputFile.properties;
-        assertNotNull(properties.getProperty("forexFirstLineNumber"));
-        assertNotNull(properties.getProperty("pricesFirstLineNumber"));
-        assertNotNull(properties.getProperty("productFirstLineNumber"));
-        assertNotNull(properties.getProperty("forexLineSeparator"));
-        assertNotNull(properties.getProperty("pricesLineSeparator"));
-        assertNotNull(properties.getProperty("productLineSeparator"));
-        assertNotNull(properties.getProperty("reportingPortfolioFileName"));
-        assertNotNull(properties.getProperty("reportingClientFileName"));
-        assertNotNull(properties.getProperty("inputFileSeperator"));
+        inputConfig = readInputFile.inputFileConfig;
+        assertTrue(inputConfig.getProductFirstLineNumber() > 0);
+        assertTrue(inputConfig.getForexFirstLineNumber() > 0);
+        assertTrue(inputConfig.getPricesFirstLineNumber() > 0);
+        assertNotNull(inputConfig.getProductLineSeparator());
+        assertNotNull(inputConfig.getPricesLineSeparator());
+        assertNotNull(inputConfig.getForexLineSeparator());
+        assertNotNull(inputConfig.getOutputFileSeperator());
+        assertNotNull(inputConfig.getReportingClientFileName());
     }
 
     @Test
-    void propertiesFileExist(){
+    void propertiesFileExist() {
         String rootPath = Thread.currentThread().getContextClassLoader().getResource("inputFileConfig.properties").getPath();
         File file = new File(rootPath);
         assertTrue(file.exists());
     }
 
     @Test
-    void forexFileContentIsValide(){
+    void forexFileContentIsValide() {
         forexFileExist();
-        //int currencyNomber =
     }
 
     @Test
@@ -183,6 +179,7 @@ class ReadInputFileTest {
         inputConfigFileDataIsNotEmpty();
         ProductService productService = new ProductService();
         //int firstLinePosition, String separateur
-       // productService.mesPorteufeuilles()
+        //productService.mesPorteufeuilles(inputFileConfig.getProductFirstLineNumber(), inputFileConfig.getProductLineSeparator());
     }
+
 }

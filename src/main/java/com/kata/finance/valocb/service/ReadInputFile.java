@@ -10,14 +10,18 @@ import java.util.*;
 public class ReadInputFile {
 
     private static final Logger logger = LogManager.getLogger(ReadInputFile.class);
-    public static InputFileConfig inputFileConfig = new InputFileConfig();
+    public static InputFileConfig inputFileConfig;
     public static Properties properties = new Properties();
     public  static Map productsByClient;
 
 
-
-
-public static void readInputConfigFile() throws IOException{
+    /**
+     *
+     * Methode pour lire les paramètres de configuration des fichiers
+     * @throws IOException
+     */
+    public static void readInputConfigFile() throws IOException{
+    inputFileConfig = new InputFileConfig();
     loadProperties();
     if(
             (properties.getProperty("forexFirstLineNumber") != null) &&

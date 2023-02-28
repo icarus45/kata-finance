@@ -17,6 +17,12 @@ public class ForexService {
     private static final Logger logger = LogManager.getLogger(ForexService.class);
     public static Set<Forex> forexSet;
 
+    /**
+     *
+     * @param firstLinePosition
+     * @param separateur
+     * @throws IOException
+     */
     public static  void readForexFile(int firstLinePosition, String separateur) throws IOException {
         String fileName = "Forex.csv";
         InputStream iStream = null;
