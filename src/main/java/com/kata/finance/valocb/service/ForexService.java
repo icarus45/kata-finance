@@ -8,7 +8,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -21,9 +25,9 @@ public class ForexService {
      *
      * @param firstLinePosition : indique la première ligne où doit debuter la lecture des données
      * @param separateur : indique le separateur utilisé entre les differentes données dans le fichier
-     * @throws IOException
+     * @throws IOException : type d'erreur retourné
      */
-    public static  void readForexFile(int firstLinePosition, String separateur) throws IOException {
+    public static  void readForexFile(int firstLinePosition, String separateur){
         String fileName = "Forex.csv";
         InputStream iStream = null;
         try {
@@ -75,6 +79,8 @@ public class ForexService {
             }
         }
     }
+
+
 
 
 }

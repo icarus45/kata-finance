@@ -15,7 +15,7 @@ import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ReadInputFileTest {
+public class ReadInputFileTest {
 
     private ReadInputFile readInputFile;
     private InputFileConfig inputConfig;
@@ -26,6 +26,7 @@ class ReadInputFileTest {
         readInputFile = new ReadInputFile();
         inputConfig = new InputFileConfig();
     }
+
 
 
     @Test
@@ -139,7 +140,7 @@ class ReadInputFileTest {
     }
 
     @Test
-    void productFileExist() {
+    public static void productFileExist() {
         String rootPath = Thread.currentThread().getContextClassLoader().getResource("Product.csv").getPath();
         File file = new File(rootPath);
         assertTrue(file.exists());
@@ -181,5 +182,6 @@ class ReadInputFileTest {
         //int firstLinePosition, String separateur
         //productService.mesPorteufeuilles(inputFileConfig.getProductFirstLineNumber(), inputFileConfig.getProductLineSeparator());
     }
+
 
 }

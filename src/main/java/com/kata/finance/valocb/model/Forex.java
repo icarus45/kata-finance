@@ -8,12 +8,19 @@ public class Forex {
     public Forex() {
     }
 
-    public Forex(String eurForex, String otherForex, int parity) {
+    public Forex(String eurForex, String otherForex, float parity) {
         this.eurForex = eurForex;
         this.otherForex = otherForex;
         this.parity = parity;
     }
 
+    /*
+        public Forex(String eurForex, String otherForex, int parity) {
+            this.eurForex = eurForex;
+            this.otherForex = otherForex;
+            this.parity = parity;
+        }
+    */
     public String getEurForex() {
         return eurForex;
     }
