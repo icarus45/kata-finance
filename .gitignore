@@ -16,6 +16,8 @@ add following lines in gitignore, from all undesirable files
 
 ### IntelliJ IDEA ###
 .idea
+.idea/
+/idea/
 *.iws
 *.iml
 *.ipr

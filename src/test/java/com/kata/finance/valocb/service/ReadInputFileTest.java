@@ -17,8 +17,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ReadInputFileTest {
 
-    private ReadInputFile readInputFile;
-    private InputFileConfig inputConfig;
+    private static ReadInputFile readInputFile;
+    private static InputFileConfig inputConfig;
 
     @BeforeEach
     public void init() {
@@ -148,7 +148,7 @@ public class ReadInputFileTest {
 
 
     @Test
-    void inputConfigFileDataIsNotEmpty() throws IOException {
+    static void inputConfigFileDataIsNotEmpty() throws IOException {
         forexFileExist();
         readInputFile.readInputConfigFile();
         inputConfig = readInputFile.inputFileConfig;
@@ -175,12 +175,12 @@ public class ReadInputFileTest {
     }
 
     @Test
-    void readProductFile() throws IOException {
+    static void readProductFile() throws IOException {
         productFileExist();
         inputConfigFileDataIsNotEmpty();
         ProductService productService = new ProductService();
-        //int firstLinePosition, String separateur
-        //productService.mesPorteufeuilles(inputFileConfig.getProductFirstLineNumber(), inputFileConfig.getProductLineSeparator());
+        productService.readProductFile(inputConfig.getProductFirstLineNumber(),inputConfig.getProductLineSeparator());
+        assertNotNull(productService.mesPorteufeuilles);
     }
 
 
